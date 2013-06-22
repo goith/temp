@@ -250,7 +250,16 @@ class Application implements
         $listeners = isset($configuration['listeners']) ? $configuration['listeners'] : array();
         $serviceManager = new ServiceManager(new Service\ServiceManagerConfig($smConfig));
         $serviceManager->setService('ApplicationConfig', $configuration);
+        //初始化模块
         $serviceManager->get('ModuleManager')->loadModules();
+        /*
+         * 整个MVC的流程都伴随着事件驱动，ZF2将其定义为MVC事件，按照执行顺序依次包括：
+		       bootstrap 引导
+		       route 路由
+		       dispatch 分发
+		       render 渲染
+		       finish 结束
+         **/
         return $serviceManager->get('Application')->bootstrap($listeners);
     }
 
@@ -319,7 +328,7 @@ class Application implements
 
         $response = $this->getResponse();
         $event->setResponse($response);
-        $this->completeRequest($event);
+        $this->completeRequest($event);//分发结束后，如果正确的从controller获得响应，会继续运行
 
         return $this;
     }

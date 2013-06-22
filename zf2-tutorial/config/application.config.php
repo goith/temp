@@ -62,4 +62,13 @@ return array(
    // Initial configuration with which to seed the ServiceManager.
    // Should be compatible with Zend\ServiceManager\Config.
    // 'service_manager' => array(),
+   //比如如果需要使用一个自定义的服务，可以在配置文件中这样写:
+   /*
+    *  'service_manager' => array(
+			'use_defaults' => true,
+			'services' => array(
+				'ViewManager'                  => 'EvaEngine\Mvc\View\ModuleViewManager',
+			),
+   	 	),  
+    * */
 );

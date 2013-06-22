@@ -30,4 +30,9 @@ chdir(dirname(__DIR__));
 require 'init_autoloader.php';
 
 // Run the application!
+// run() : MVC启动阶段
+/* 启动阶段对应的事件有:
+   route 路由
+   dispatch 分发
+ */
 Zend\Mvc\Application::init(require 'config/application.config.php')->run();
